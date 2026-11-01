@@ -1,0 +1,16 @@
+AUDITORÍA EDITORIAL: DIEZ PASADAS
+01. Cobertura temática: Se contrastaron datos de H2020, HE, costes de solicitudes, evaluación, ERC, loterías y cambios solicitados.
+02. Denominadores: Se verificó que los cortes HE 2024 y 2025 son acumulados de propuestas evaluadas, no presentaciones anuales.
+03. Datos de tasas: 11,9% = H2020; 14% = HE acumulado publicado; ERC 2027 ~4,8% = estimación de plazas, no resultado.
+04. Costes no mezclados: €5-10 mil M = no financiadas H2020; €1,92-2,82 mil M = todas solicitudes HE hasta 2024.
+05. Umbral de Szilard: La hipótesis 20.000/0,03=666.667 y 666.667>500.000; inequívocamente etiquetada ilustrativa.
+06. Equilibrio de posiciones: Se añadió crítica a las loterías: preservación de calidad, riesgos de nuevos sesgos, no extrapolación.
+07. Diseño y jerarquía: Se revisaron tamaños: títulos >=24pt y cuerpo principal >=14pt; citas pequeñas intencionales.
+08. Trazabilidad de fuentes: Cada diapositiva contiene fuentes en pie y sus direcciones completas en las notas del presentador.
+09. Actualidad: Los resultados ERC 2026 se distinguen de las previsiones ERC 2027, con actualización al 28/10/2026.
+10. Verificación de entrega: Se reabre el PPTX, se comprueba el número de diapositivas, los gráficos editables y archivos ZIP válidos.
+
+Documento: /mnt/data/Financiacion_europea_loteria_costes_simplificacion_2026.pptx
+Diapositivas: 11
+Gráficas editables: 3
+Citas en notas: True
