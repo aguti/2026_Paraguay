@@ -1,0 +1,39 @@
+\begin{animateinline}[autoplay,loop,width=10.5cm]{10}
+\multiframe{300}{rPos=0+1}{ %300
+	\begin{tikzpicture}
+	% Signal
+	\coordinate (signal) at (0.0,0.0);	
+	% Axis
+	\draw [line width=3.0 ] ( $(signal) + (0.0,0.0)$ ) rectangle ( $(signal) + (30.0,20.0)$);	
+	\foreach \i in {0,1,...,5}{
+		\pgfmathparse{int(\i*4.8 + 0.1) + 16}\let\result=\pgfmathresult
+		\pgfmathparse{int(\i*4)}\let\pos=\pgfmathresult
+		\draw [line width=4.0 ] ($(signal) + ( -0.2 , \pos )$) node [left,scale=4.0]{$\result$} -- ($(signal) + ( 0.2 , \pos )$);
+	}
+
+	\pgfmathparse{mod(0.178571429*\rPos,4.28)}\let\shift=\pgfmathresult
+%	\pgfmathparse{\result>1?\result:1}\let\resultB=\pgfmathresult
+	\foreach \i in {1,...,7}{
+		\pgfmathparse{\i*4.28 - \shift}\let\pos=\pgfmathresult
+		\draw [line width=4.0 ] ($(signal) + ( \pos , -0.2 )$) -- ($(signal) + ( \pos , 0.2 )$);
+	}
+	\node[scale=5.0 ]            at ($(signal) + ( 15.0 , 22.5)$)  {{\bf Aggregated consumption}};
+	\node[scale=5.0, rotate=90 ] at ($(signal) + ( -7.0 , 10.0 )$) {P(GW)};
+	\node[scale=5.0 ]            at ($(signal) + ( 15.0 , -2.0 )$) {Time(day)};
+	\pgfmathparse{int(\rPos)}\let\time=\pgfmathresult
+	\draw [line width=2.0 ] plot[smooth, raw gnuplot] function{plot "animations/DEMR_2013" every ::(0+\time)::(168+\time) u ( ($0) * 30.0 / 168 ):( ( ( ($6) - 16000 ) / 24000 ) * 20.0 )};
+
+	\end{tikzpicture}
+}
+\end{animateinline}
+
+
+
+
+
+
+
+
+
+
+

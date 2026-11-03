@@ -1,0 +1,3 @@
+pdflatex -shell-escape -enable-write18 smoothing.tex
+pdflatex -shell-escape -enable-write18 mufco_demo.tex
+pdflatex -shell-escape -enable-write18 load_scheduling.tex

@@ -1,0 +1,56 @@
+\begin{animateinline}[autoplay,loop,width=0.9\textwidth]{12}
+\multiframe{520}{rPos=0+1}{ %520
+	\begin{tikzpicture}
+	% Signal
+	\coordinate (signal) at (0.0,0.0);	
+	% Axis
+	\draw ( $(signal) + (0.0,0.0)$ ) rectangle ( $(signal) + (30.0,5.0)$);	
+	\node[scale=3.0, anchor=north,align=center] at ($(signal) + (15.0,6.5)$) {Aggregated consumption};
+	\foreach \i in {0,1,...,5}{
+		\pgfmathparse{int(\i*4.8 + 0.1) + 16}\let\result=\pgfmathresult
+		\draw [line width=2.0 ] ($(signal) + ( -0.2 , \i )$) node [left,scale=2.0]{$\result$} -- ($(signal) + ( 0.2 , \i )$);
+	}
+	\node[scale=3.0, rotate=90, anchor=north,align=center] at ($(signal) + ( -4.0 , 2.5 )$) {P(GW)};
+	\pgfmathparse{int(\rPos*8)}\let\time=\pgfmathresult
+	\draw [line width=0.25 ] plot[smooth, raw gnuplot] function{plot "animations/mufco_demo" every ::(0+\time)::(224+\time) u ( ($0) * 30.0 / 224 ):( ( ( ($1) - 16000 ) / 24000 ) * 5.0 )};
+
+	% FFT
+	\coordinate (fft) at (0.0,-7.0);
+	% Axis
+	\draw ( $(fft) + (0.0,0.0)$ ) rectangle ( $(fft) + (30.0,5.0)$);
+	\node[scale=3.0, anchor=north,align=center] at ($(fft) + (15.0,6.5)$) {FFT of aggregated consumption};
+	\foreach \i in {0,1,...,5}{		
+		\pgfmathparse{\i*1}\let\result = \pgfmathresult
+		\draw [line width=2.0 ] ($(fft) + ( -0.2 , \i )$) node [left,scale=2.0]{$\result$} -- ($(fft) + ( 0.2 , \i )$);
+	}
+	\node[scale=3.0, rotate=90, anchor=north,align=center] at ($(fft) + ( -4.0 , 2.5 )$) {P(GW)};
+	\pgfmathparse{int( int( \rPos / 4 ) + 8)}\let\time=\pgfmathresult
+	\draw [line width=0.25 ] plot[raw gnuplot] function{plot "animations/mufco_demo_famp" u (($0) * 30.0 / 146 ):(($\time) * 5.0/ 5000 - 7.0 ) }; 
+
+	% Oscillators
+	\coordinate (osc) at (0.0,-14.0);
+	% Axis
+	\draw ( $(osc) + (0.0,0.0)$ ) rectangle ( $(osc) + (30.0,5.0)$);	
+	\node[scale=3.0, anchor=north,align=center] at ($(osc) + (15.0,6.5)$) {Oscillator distribution};
+	\foreach \i in {0,1,...,5}{		
+		\pgfmathparse{int(\i*100)}\let\result=\pgfmathresult
+		\draw [line width=2.0 ] ($(osc) + ( -0.2 , \i )$) node [left,scale=2.0]{$\result$} -- ($(osc) + ( 0.2 , \i )$);
+	}
+	\node[scale=3.0, rotate=90, anchor=north,align=center] at ($(osc) + ( -4.0 , 2.5 )$) {$N_{osc}$};
+	\pgfmathparse{int( int( \rPos / 4 ) + 8)}\let\time=\pgfmathresult
+	\draw [line width=0.25 ] plot[smooth, raw gnuplot] function{plot "animations/mufco_demo_cmp" u ( ($0) * (45*1024)/(16*315) * 30.0 / 146 ):(($\time) * 5.0/ 500 - 14.0 ) }; %$  %($0) * 25.0 / 17 
+
+	\end{tikzpicture}
+}
+\end{animateinline}
+
+
+
+
+
+
+
+
+
+
+

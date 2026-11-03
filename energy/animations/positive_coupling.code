@@ -1,0 +1,114 @@
+\newcommand{\basePC}[6]{%
+
+	% Define angles
+	\def\oscA{#1};
+	\def\oscB{#2};
+	\def\oscC{#3};
+	\def\oscD{#4};
+	\def\oscE{#5};
+	\def\oscF{#6};	
+	
+	%Circle
+	\draw [color=black, line width=1.0](    0 , 0 ) circle (5.0);
+	\draw [color=black, line width=1.0]( -5.5 , 0 )    --     ( 6.1 , 0.0 );
+	\draw [color=black, line width=1.0](  0.0 , -5.5 ) --     ( 0.0 , 5.5);	
+	
+	%Oscillators
+	\pgfmathparse{5*cos(\oscA)}\let\XvalueA=\pgfmathresult
+	\pgfmathparse{5*sin(\oscA)}\let\YvalueA=\pgfmathresult
+	\draw[line width=1.0,dashed,>=latex,->] (0,0) -- (\XvalueA,\YvalueA);%node[scale=2.0, right ]{$e^{\mathrm{i}\theta^{i}}$};
+
+%	\pgfmathparse{6.2*cos(\oscA)}\let\XvalueAA=\pgfmathresult
+%	\pgfmathparse{6.2*sin(\oscA)}\let\YvalueAA=\pgfmathresult
+%	\draw[line width=0.5,dashed] (0,0) -- (\XvalueAA,\YvalueAA) node[scale=3.0, yshift=5.0 , xshift=10.0 ]{$e^{\mathrm{i}\theta_{i}}$};
+%	\draw [domain=0:\oscA, dotted, line width=1.0] plot ({5.2*cos(\x)}, {5.2*sin(\x)});
+%	\pgfmathparse{5.6*cos(\oscA/2.0)}\let\XvalueAA=\pgfmathresult
+%	\pgfmathparse{5.6*sin(\oscA/2.0)}\let\YvalueAA=\pgfmathresult
+%	\node [scale=2.5 ] at ( \XvalueAA , \YvalueAA )  {$\theta_{i}$};	
+
+	\pgfmathparse{5*cos(\oscB)}\let\XvalueB=\pgfmathresult
+	\pgfmathparse{5*sin(\oscB)}\let\YvalueB=\pgfmathresult
+	\draw[line width=1.0,dashed,>=latex,->] (0,0) -- (\XvalueB,\YvalueB);
+
+	\pgfmathparse{5*cos(\oscC)}\let\XvalueC=\pgfmathresult
+	\pgfmathparse{5*sin(\oscC)}\let\YvalueC=\pgfmathresult
+	\draw[line width=1.0,dashed,>=latex,->] (0,0) -- (\XvalueC,\YvalueC);
+
+	\pgfmathparse{5*cos(\oscD)}\let\XvalueD=\pgfmathresult
+	\pgfmathparse{5*sin(\oscD)}\let\YvalueD=\pgfmathresult
+	\draw[line width=1.0,dashed,>=latex,->] (0,0) -- (\XvalueD,\YvalueD);
+
+	\pgfmathparse{5*cos(\oscE)}\let\XvalueE=\pgfmathresult
+	\pgfmathparse{5*sin(\oscE)}\let\YvalueE=\pgfmathresult
+	\draw[line width=1.0,dashed,>=latex,->] (0,0) -- (\XvalueE,\YvalueE);
+
+	\pgfmathparse{5*cos(\oscF)}\let\XvalueF=\pgfmathresult
+	\pgfmathparse{5*sin(\oscF)}\let\YvalueF=\pgfmathresult
+	\draw[line width=1.0,dashed,>=latex,->] (0,0) -- (\XvalueF,\YvalueF);
+
+
+	%Order parameter
+	%\pgfmathparse{(\oscA+\oscB+\oscC+\oscD+\oscE+\oscF)/6}\let\angleOP=\pgfmathresult
+
+	\pgfmathparse{(\XvalueA+\XvalueB+\XvalueC+\XvalueD+\XvalueE+\XvalueF)/6}\let\XvalueOP=\pgfmathresult
+	\pgfmathparse{(\YvalueA+\YvalueB+\YvalueC+\YvalueD+\YvalueE+\YvalueF)/6}\let\YvalueOP=\pgfmathresult	
+
+	\draw[line width=3.0,>=latex,->] (0,0) -- (\XvalueOP,\YvalueOP);% node[scale=2.5 , yshift=-5.0 , xshift=5.0 ]{$r$};%{$R e^{\mathrm{i}\Phi}$};
+
+%	\pgfmathparse{ sqrt( \XvalueOP*\XvalueOP + \YvalueOP*\YvalueOP ) }\let\R=\pgfmathresult
+%	\pgfmathparse{ asin( \YvalueOP / \R )  }\let\angleOP=\pgfmathresult
+%	\pgfmathparse{6.2*cos(\angleOP)}\let\XvalueOP=\pgfmathresult
+%	\pgfmathparse{6.2*sin(\angleOP)}\let\YvalueOP=\pgfmathresult
+%	\draw[line width=0.5,dashed] (0,0) -- (\XvalueOP,\YvalueOP)node[scale=3.0 , yshift=5.0 , xshift=10.0 ]{$r e^{\mathrm{i}\Theta}$};
+%	\draw [domain=0:\angleOP, dotted, line width=1.0] plot ({6.0*cos(\x)}, {6.0*sin(\x)});
+%	\pgfmathparse{6.4*cos((\angleOP+\oscA)/2.0)}\let\XvalueOP=\pgfmathresult
+%	\pgfmathparse{6.4*sin((\angleOP+\oscA)/2.0)}\let\YvalueOP=\pgfmathresult
+%	\node [scale=2.5 ] at ( \XvalueOP , \YvalueOP )  {$\Theta$};
+
+}
+
+\begin{animateinline}[autoplay,loop,width=5cm]{10}
+\multiframe{101}{rPos=0+0.1}{ % 101
+	\begin{tikzpicture}
+	\basePC
+	{ 220 - \rPos*(220-45) /10  }
+	{ 130 - \rPos*(130-45) /10 }
+	{  90 - \rPos*(90-45)  /10 }
+	{ 360 + \rPos*(405 - 360)/10 }
+	{ 290 + \rPos*(405 - 290)/10 }
+	{ 230 + \rPos*(405 - 230)/10 }
+	\end{tikzpicture}
+}
+\end{animateinline}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

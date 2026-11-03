@@ -1,0 +1,392 @@
+\ProvidesPackage{beamercolorthemerobolabo}[2014/10/14]
+
+% Beamer theme by Sylvain Bouveret <sylvain[dot]bouveret[aT]cert[DoT]fr>
+% sep. 2010 version 0.42
+%
+% based on the LaTeX-Beamer package :
+% Copyright 2003 by Till Tantau <tantau@users.sourceforge.net>
+%
+% This program can be redistributed and/or modified under the terms
+% of the GNU Public License, version 2.
+
+\RequirePackage{tikz}
+\usetikzlibrary{arrows}
+
+\makeatletter
+
+%Remove navigation symbols
+\setbeamertemplate{navigation symbols}{}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Processing options...
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\def\robolabo@headline{none}%
+\def\robolabo@frametitle{picture-section}%
+\def\robolabo@imagename{logo/RBLB_logo_darkgray}%
+\def\upm@imagename{logo/upm_logo}%
+\def\etsit@imagename{logo/etsit_logo}%
+\def\gedirci@imagename{logo/logoGEDIRCI2}%
+\def\swarm@imagename{logo/swarmLogo}%
+\def\eires@imagename{logo/eires}%
+\def\robolabo@titlepage{picture}%
+\define@key{robolabo}{headline}[none]{%
+  \def\robolabo@headline{#1}%
+}
+\define@key{robolabo}{frametitle}[picture]{%
+  \def\robolabo@frametitle{#1}%
+}
+\define@key{robolabo}{imagename}{%
+  \def\robolabo@imagename{#1}%
+  \pgfdeclareimage[width=0.12\textwidth,interpolate=true]{headlineimage}{\robolabo@imagename}
+}
+\define@key{robolabo}{titlepage}[picture]{%
+  \def\robolabo@titlepage{#1}%
+}
+
+\def\robolabooptions#1{\setkeys{robolabo}{#1}}
+
+\def\insertintermediateframenumber{\inserttotalframenumber}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Some computations dedicated to the robolabo...
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newdimen\robolabo@currentbarlength
+\newdimen\robolabo@framenumberrectangle
+\newdimen\robolabo@titlerectangle
+\newdimen\robolabo@leftbar
+\newdimen\robolabo@tmpresult
+\newdimen\robolabo@barlength
+
+\newdimen\robolabo@stepbar
+
+\newcount\robolabo@numer
+\newcount\robolabo@denom
+
+\robolabo@framenumberrectangle=\paperwidth
+\robolabo@titlerectangle=\paperwidth
+
+\robolabo@leftbar=0.15cm
+\robolabo@barlength=\paperwidth
+
+\newbox\robolabo@framenumberbox
+
+\newcount\robolabo@firstpb
+\robolabo@firstpb=0
+
+\def\insertrobolabo{
+  \ifnum\insertintermediateframenumber=1\else
+
+    \ifnum\robolabo@firstpb=0
+      \setbox\robolabo@framenumberbox=\hbox{\usebeamerfont{section in head/foot}\color{fg}\inserttotalframenumber~/~\inserttotalframenumber}
+      \newdimen\robolabo@framenumberboxwidth
+      \robolabo@framenumberboxwidth=\wd\robolabo@framenumberbox
+      
+      \global\advance\robolabo@framenumberrectangle by -0.15cm
+      \global\advance\robolabo@framenumberrectangle by -0.5\robolabo@framenumberboxwidth
+      \global\advance\robolabo@titlerectangle by -0.3cm
+      \global\advance\robolabo@titlerectangle by -\robolabo@framenumberboxwidth
+
+      \global\advance\robolabo@barlength by -\robolabo@framenumberboxwidth
+      \global\advance\robolabo@barlength by -0.45cm
+
+      \robolabo@numer=1
+      \robolabo@denom=\insertintermediateframenumber
+      \advance\robolabo@denom by -1
+      \robolabo@tmpresult=\robolabo@barlength
+      \multiply\robolabo@tmpresult by \robolabo@numer
+      \divide\robolabo@tmpresult by \robolabo@denom
+      \global\robolabo@stepbar=\robolabo@tmpresult
+
+      \global\robolabo@currentbarlength=-\robolabo@stepbar
+
+      \global\robolabo@firstpb=1
+    \fi
+
+  
+    \global\robolabo@currentbarlength=\insertframenumber\robolabo@stepbar
+    \global\advance\robolabo@currentbarlength by -\robolabo@stepbar
+    
+    \begin{tikzpicture}[thin]
+      \usebeamercolor{section in head/foot}
+      \useasboundingbox (0, 0) rectangle  (\paperwidth, 0.6cm);
+      %\draw (\robolabo@framenumberrectangle, 0.21cm) node [anchor=mid] {\color{fg}\insertframenumber~/~\insertintermediateframenumber};
+      %\draw (\robolabo@framenumberrectangle, 0.21cm) node [anchor=mid] {\color{fg}\insertframenumber};
+      %\draw (\robolabo@framenumberrectangle, 0.21cm) node [anchor=mid];
+      %\draw (\robolabo@titlerectangle, 0.21cm) node [anchor=south east] {\color{fg}\insertshorttitle};
+      \draw[fg!30!bg, <->, >=serif cm] (\robolabo@leftbar, 0.21cm) -- (\robolabo@titlerectangle, 0.21cm);
+      \draw (\robolabo@currentbarlength, 0.21cm)
+      ++(\robolabo@leftbar, 0cm) node[anchor=north] {\color{fg!30!bg}$\blacktriangle$};
+    \end{tikzpicture}
+    \fi
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Some color definitions...
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%\definecolor{robolabo@bgyellow}{rgb}{0.95,0.95,0.85}
+%\definecolor{robolabo@bggray}{rgb}{0.9,0.9,0.9}
+
+\definecolor{robolabo@purple}{rgb}{0.84, 0.82, 0.86}
+%\definecolor{robolabo@bgblue}{rgb}{0.92, 0.93, 0.95}
+%\definecolor{robolabo@fgblue}{rgb}{0.9, 0.9, 0.9}
+%\definecolor{robolabo@bgblue}{rgb}{0.92, 0.93, 0.95}
+
+%\definecolor{robolabo@darkbgblue}{rgb}{0.01,0.05,0.15}
+%\definecolor{robolabo@darkfgblue}{rgb}{0.25,0.45,0.5}
+%\definecolor{robolabo@darkbgblue}{rgb}{0.01,0.01,0.01}
+%\definecolor{robolabo@darkfgblue}{rgb}{0.2,0.2,0.2}
+
+\mode<presentation>
+
+%\setbeamercolor{palette primary}{fg=robolabo@fgblue,bg=robolabo@bgblue}
+%\setbeamercolor{palette secondary}{fg=robolabo@fgblue,bg=robolabo@bgblue}
+%\setbeamercolor{palette tertiary}{fg=robolabo@fgblue,bg=robolabo@bgblue}
+%\setbeamercolor{palette quaternary}{fg=robolabo@fgblue,bg=robolabo@bgblue}
+%\setbeamercolor{palette secundary}{fg=white!90!robolabo@fgblue,bg=robolabo@fgblue}
+%\setbeamercolor{palette tertiary}{fg=robolabo@fgblue,bg=robolabo@bgblue}
+%\setbeamercolor{palette quaternary}{fg=robolabo@fgblue,bg=robolabo@bgblue}
+
+%%\setbeamercolor{structure}{fg=robolabo@fgblue,bg=white}
+%\setbeamercolor{structure}{fg=robolabo@fgblue,bg=red}
+
+%\setbeamercolor{background canvas}{parent=palette primary}
+
+%\setbeamercolor{section in head/foot}{parent=palette primary}
+%\setbeamercolor{frametitle}{bg=robolabo@fgblue,fg=robolabo@bgblue!90!robolabo@fgblue}
+
+
+%\setbeamercolor{alerted text}{fg=black!40!red,bg=bg}
+%\setbeamercolor{example text}{fg=black!40!green,bg=bg}
+
+%\setbeamercolor{block title}{use=structure,fg=structure.fg,bg=robolabo@bggray}
+%\setbeamercolor{block title alerted}{fg=alerted text.fg,bg=alerted text.fg!10!bg}
+%\setbeamercolor{block title example}{fg=example text.fg,bg=example text.fg!10!bg}
+
+%\setbeamercolor{block body}{fg=black,bg=robolabo@bggray}
+%\setbeamercolor{block body alerted}{fg=normal text.fg,bg=alerted text.fg!10!bg}
+%\setbeamercolor{block body example}{fg=normal text.fg,bg=example text.fg!10!bg}
+
+%\setbeamercolor{title}{fg=robolabo@fgblue,bg=white}
+%\setbeamercolor{subtitle}{parent=title}
+
+%Get input param color
+\DeclareOptionBeamer{color}{\definecolor{beamer@robolabo@color}{named}{#1}}
+\ProcessOptionsBeamer
+
+%Set bakground grading
+%\pgfdeclareverticalshading{myshadingE}{100bp}{color(0bp)=(beamer@robolabo@color);color(50bp)=(beamer@robolabo@color!20);color(100bp)=(beamer@robolabo@color)}
+\pgfdeclareverticalshading{myshadingE}{100bp}{color(0bp)=(white);color(50bp)=(beamer@robolabo@color)}
+%\pgfdeclareverticalshading{myshadingE}{100bp}{color(0bp)=(beamer@robolabo@color)}
+
+\usebackgroundtemplate{
+  \begin{tikzpicture}
+    \pgfpathrectangle{(0,0)}{\pgfpoint{\paperwidth}{\paperheight}}
+    \pgfshadepath{myshadingE}{0} 
+    \pgfuseshading{myshadingE}
+  \end{tikzpicture}
+}
+%\setbeamercolor{background canvas}{bg=black!30}
+
+%Set font color of the title on title page
+%\setbeamercolor{title}{fg=beamer@robolabo@color!90}
+\setbeamercolor{title}{fg=black}
+\setbeamercolor{subtitle}{fg=black}
+\setbeamercolor{author}{fg=black}
+\setbeamercolor{institute}{fg=black}
+\setbeamercolor{date}{fg=black}
+
+%Set font color of the slide title
+%\setbeamercolor{frametitle}{fg=beamer@robolabo@color!10}
+\setbeamercolor{frametitle}{fg=black}
+
+%TOC colors
+%\setbeamercolor{section in toc}{fg = beamer@robolabo@color!90}
+\setbeamercolor{section in toc}{fg=black}
+%\setbeamercolor{section in toc shaded}{fg = beamer@robolabo@color!90} 
+\setbeamercolor{section in toc shaded}{fg = black, bg = black!20} 
+
+\setbeamercolor{subsection in toc}{fg=black}
+\setbeamercolor{subsection in toc shaded}{fg = black, bg = black!20} 
+
+%Item, subitems, subsubitems colors
+\setbeamercolor{item}{fg = black}
+\setbeamercolor{subitem}{fg = black}
+\setbeamercolor{subsubitem}{fg = black}
+
+%Description items, i don't know what it is
+%\setbeamercolor{description item}{fg = beamer@robolabo@color}
+
+%captions
+\setbeamercolor{caption}{fg = black}
+\setbeamercolor{caption name}{fg = black}
+
+% Standard block
+%\setbeamercolor{block title}{fg = Descitem, bg = StdTitle!15!white}
+%\setbeamercolor{block body}{bg = StdBody!5!white}
+
+% Alert block
+%\setbeamercolor{block title alerted}{bg = AlTitle}
+%\setbeamercolor{block body alerted}{bg = AlBody!5!white}
+
+% Example block
+%\setbeamercolor{block title example}{bg = ExTitle}
+%\setbeamercolor{block body example}{bg = ExBody!5!white}
+
+% And one final thing, the colour of the text
+%\setbeamercolor{normal text}{fg = beamer@robolabo@color}
+\setbeamercolor{normal text}{fg = black}
+
+
+%%%%%%%%%%%%%%
+%%
+%% Inner theme
+%%
+%%%%%%%%%%%%%%
+
+
+%%%%%%
+% Here we am using the rounded theme for the overall "feel" of the presentation. You can change the specific details by editing that particular option as we have done below.
+%\useinnertheme{rounded}
+%\useinnertheme{circles}
+\setbeamertemplate{section in toc}[circle]
+\setbeamertemplate{subsection in toc}[circle]
+%\setbeamertemplate{subsection in toc}[circle]{3pt}
+%{\leavevmode\leftskip=2em\inserttocsubsection\par}
+
+% Instead of rounded circles, we will use triangles as the indicator for items.
+\setbeamertemplate{itemize items}[triangle]
+
+% The default option for enumerate environment removes the circles around the numbers provided by the "rounded" inner theme. Just simple numbers remain.
+\setbeamertemplate{enumerate items}[default]
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Title page...
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\defbeamertemplate*{title page}{robolabo theme}{
+  \edef\tempa{picture}
+  \ifx\robolabo@titlepage\tempa
+  \vfill
+  \parbox{0.28\textwidth}{
+    \begin{center}
+    %\pgfimage[width=0.17\textwidth]{\upm@imagename}
+    %\vspace{1.0cm}
+    %\pgfimage[width=0.27\textwidth]{\etsit@imagename}
+    %\vspace{1.0cm}
+    %\pgfimage[width=0.27\textwidth]{\gedirci@imagename}
+    %\vspace{1.0cm}
+    %\pgfimage[width=0.27\textwidth]{\robolabo@imagename}
+    \pgfimage[width=0.27\textwidth]{\swarm@imagename}
+    \vspace{0.5cm}
+    \pgfimage[width=0.27\textwidth]{\robolabo@imagename}
+    \vspace{0.2cm}
+    %\pgfimage[width=0.30\textwidth]{\eires@imagename}
+    \end{center}
+  }\hfill
+  \parbox{0.7\textwidth}{
+    \begin{center}
+      {\usebeamerfont{title}\usebeamercolor{title}{\color{fg}\inserttitle}}
+      \ifx\insertsubtitle\@empty\\[\baselineskip]
+      \else{\\\usebeamerfont{subtitle}\usebeamercolor{subtitle}{\color{fg}\insertsubtitle}}\\[\baselineskip]\fi
+      \hrule\vskip\baselineskip
+      \ifx\insertauthor\@empty\ \\
+      \else{\usebeamerfont{author}\usebeamercolor{author}{\color{fg}\insertauthor}}\\\fi
+      \ifx\insertdate\@empty\ \\
+      \else{\usebeamerfont{date}\usebeamercolor{date}{\color{fg}\insertdate}}\\\fi
+      \ifx\insertinstitute\@empty
+      \else{\vspace{0.5cm}\usebeamerfont{institute}\usebeamercolor{institute}{\color{fg}\insertinstitute}}\\\fi
+      \insertlogo
+    \end{center}
+  }\vfill
+  \else
+  \pgfdeclarehorizontalshading{separationtitlepagelineshading}{0.5pt}{color(0cm)=(bg); 
+    color(0.5\textwidth)=(structure.fg); color(\textwidth)=(bg)}
+  \begin{center}
+    \vfill
+    {\usebeamerfont{title}\usebeamercolor{title}{\color{fg}\inserttitle}}
+
+    \ifx\insertsubtitle\@empty 
+    \else{\usebeamerfont{subtitle}\usebeamercolor{subtitle}{\color{fg}\insertsubtitle}}\\[\baselineskip]\fi
+
+    \pgfuseshading{separationtitlepagelineshading}
+    \ifx\insertauthor\@empty\ \\
+    \else{\usebeamerfont{author}\usebeamercolor{author}{\color{fg}\insertauthor}}\\\fi
+    \ifx\insertdate\@empty\ \\
+    \else{\usebeamerfont{date}\usebeamercolor{date}{\color{fg}\insertdate}}\\\fi
+    \ifx\insertinstitute\@empty
+    \else{\vspace{0.5cm}\usebeamerfont{institute}\usebeamercolor{institute}{\color{fg}\insertinstitute}}\\\fi
+    \insertlogo
+    \pgfuseshading{separationtitlepagelineshading}
+    \vfill
+  \end{center}
+  \fi
+}
+
+\setbeamertemplate{title page}[robolabo theme]
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Headline...
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\LogoLine}{%
+\raisebox{-12mm}[0pt][0pt]{%
+\begin{pgfpicture}{0mm}{0mm}{0mm}{0mm}
+\pgfsetlinewidth{0.28mm}
+%\color{robolabo@purple}
+\color{gray}
+\pgfline{\pgfpoint{-3mm}{1mm}}{\pgfpoint{10.8cm}{1mm}}
+\end{pgfpicture}}}
+
+
+% Include the line that we just created in the headline
+\setbeamertemplate{headline}[text line]{\LogoLine}
+
+% Now the logo. As it turns out. I could not include the logo in the headline. If I tried to, the headline kept shifting downwards.
+% Acting a little smart and lazy, I just included the logo in the right sidebar and shifted it up. 
+\setbeamertemplate{sidebar canvas right}
+{
+  \vspace*{3pt}\hspace*{-80pt}%
+    \pgfimage[width=0.2\textwidth]{logo/RBLB_logo_darkgray}
+  %\vspace*{8pt}\hspace*{-120pt}%
+    %\pgfimage[width=0.3\textwidth]{logo/eires}
+}
+
+%%%%%
+% Now that we have changed the headline, we will need to orient the frame titles in a way that the come at the right stop just above the horizontal line.
+\setbeamertemplate{frametitle}{
+\vspace*{4mm}\hspace*{-2mm}\insertframetitle}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Footline...
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\defbeamertemplate*{footline}{robolabo theme}{
+  \begin{beamercolorbox}[wd=\paperwidth,ht=0.6cm,dp=0ex]{structure.fg}%
+    \insertrobolabo
+  \end{beamercolorbox}%
+}
+
+
+\mode<all>
+
+\makeatother

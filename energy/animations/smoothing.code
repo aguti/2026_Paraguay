@@ -1,0 +1,64 @@
+\begin{animateinline}[autoplay,loop,width=0.9\textwidth]{5}
+\multiframe{110}{rPos=0+0.1}{ % 110
+	\begin{tikzpicture}	
+	%Axis
+	\draw [line width=4.0,>=latex,->] (-1.0,0)  -- (32.0,0) node[scale=6.0, below ]{$t$}; 
+	\draw [line width=4.0,>=latex,->] (0,-11.0) -- (0,11.0) node[scale=6.0, above left]{$P$};
+%	\node [scale=5.0, red]   at (16.0,12.0) {$A^{nc}_{n} sin ( n \omega_{0} t + \phi^{nc}_{n} )$};
+%	\node [scale=5.0, blue]  at (16.0,14.0) {$A^{c}_{n} sin ( n \omega_{0} t + \phi^{c}_{n})$};
+%	\node [scale=5.0, green] at (16.0,16.0) {$A_{n} sin ( n \omega_{0} t + \phi_{n} )$};
+	%Frequency components
+	\draw[line width=2.0, red] plot[smooth, raw gnuplot] function{set xrange[0:32]; plot (10*sin(2*pi*x/24 + pi/2))};
+%	\draw (0.0,10.0) node [scale=5.0, left, red] {$A^{nc}_{n} sin ( n \omega_{0} t + \phi^{nc}_{n} )$};
+	\draw[line width=2.0,blue] plot[smooth, raw gnuplot] function{set xrange[0:32]; plot (1.0*\rPos*sin(2*pi*x/24 - pi/2))};
+%	\draw (0.0,-3.0) node [scale=5.0, left, blue] {$A^{c}_{n} sin ( n \omega_{0} t + \phi^{c}_{n})$};
+	\draw[line width=5.0, green] plot[smooth, raw gnuplot] function{set xrange[0:32]; plot ((10-1.0*\rPos)*sin(2*pi*x/24 + pi/2))};
+%	\draw (0.0,7.0) node [scale=5.0, left, green] {$A_{n} sin ( n \omega_{0} t + \phi_{n} )$};
+	\end{tikzpicture}
+}
+%\newframe
+%\multiframe{11}{rPos=0+1}{
+%	\begin{tikzpicture}	
+%	%Axis
+%	\draw [line width=4.0,>=latex,->] (-1.0,0)  -- (32.0,0) node[scale=6.0, below ]{$t$}; 
+%	\draw [line width=4.0,>=latex,->] (0,-11.0) -- (0,11.0) node[scale=6.0, above left]{$P$};
+%	\node [scale=5.0, red]   at (16.0,12.0) {$A^{nc}_{n} sin ( n \omega_{0} t + \phi^{nc}_{n} )$};
+%	\node [scale=5.0, blue]  at (16.0,14.0) {$A^{c}_{n} sin ( n \omega_{0} t + \phi^{c}_{n})$};
+%	\node [scale=5.0, green] at (16.0,16.0) {$A_{n} sin ( n \omega_{0} t + \phi_{n} )$};
+%	%Frequency components
+%	\draw[line width=2.0, red] plot[smooth, raw gnuplot] function{set xrange[0:32]; plot (10*sin(2*pi*x/24 + pi/2))};
+%%	\draw (0.0,10.0) node [scale=5.0, left, red] {$A^{nc}_{n} sin ( n \omega_{0} t + \phi^{nc}_{n} )$};
+%	\draw[line width=2.0,blue] plot[smooth, raw gnuplot] function{set xrange[0:32]; plot ((10-1.0*\rPos)*sin(2*pi*x/24 - pi/2))};
+%%	\draw (0.0,-3.0) node [scale=5.0, left, blue] {$A^{c}_{n} sin ( n \omega_{0} t + \phi^{c}_{n})$};
+%	\draw[line width=2.0, green] plot[smooth, raw gnuplot] function{set xrange[0:32]; plot (1.0*\rPos*sin(2*pi*x/24 + pi/2))};
+%%	\draw (0.0,7.0) node [scale=5.0, left, green] {$A_{n} sin ( n \omega_{0} t + \phi_{n} )$};
+%	\end{tikzpicture}
+%}
+
+\end{animateinline}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

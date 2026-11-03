@@ -1,0 +1,30 @@
+\newcommand{\baseE}{%
+	% Signal - Rectangle
+	\coordinate (signal) at (0.0,0.0);	
+	% Axis
+	\draw ( $(signal) + (0.0,0.0)$ ) rectangle ( $(signal) + (30.0,15.0)$);	
+	\node[scale=3.0, anchor=north,align=center] at ($(signal) + (15.0,17.0)$) {{\bf Aggregated consumption}};
+	\foreach \i in {0,1,...,5}{
+		\pgfmathparse{int(\i*8 + 0.1)}\let\result=\pgfmathresult
+		\pgfmathparse{int(\i*3)}\let\pos=\pgfmathresult
+		\draw [line width=4.0 ] ($(signal) + ( -0.2 , \pos )$) node [left,scale=3.0]{$\result$} -- ($(signal) + ( 0.2 , \pos )$);
+	}
+	\node[scale=3.0, rotate=90 ] at ($(signal) + ( -4.0 ,  7.5 )$) {P(GW)};
+	\node[scale=3.0 ]            at ($(signal) + ( 15.0 , -1.0 )$) {Time(day)};
+}
+
+\begin{animateinline}[autoplay,loop,width=11cm]{10}
+\multiframe{300}{rPos=0+1}{ % 300
+	\begin{tikzpicture}
+	\baseE
+	\pgfmathparse{mod( 0.125*\rPos , 3)}\let\shift=\pgfmathresult
+	\foreach \i in {1,...,10}{
+		\pgfmathparse{\i*3 - \shift}\let\pos=\pgfmathresult
+		\draw [line width=4.0 ] ($(signal) + ( \pos , -0.2 )$) -- ($(signal) + ( \pos , 0.2 )$);
+	}
+	\pgfmathparse{int(\rPos)}\let\time=\pgfmathresult
+	\draw [line width=1.0 , red ] plot[smooth, raw gnuplot] function{plot "animations/PV_example_sim_2"  every ::(1+\time)::(241+\time) u ( ($0) * 30.0 / 240 ):( (  ($1) / 40000 ) * 15.0 )};
+	\draw [line width=1.0       ] plot[smooth, raw gnuplot] function{plot "animations/virtual_user_example_sim_2" every ::(1+\time)::(241+\time) u ( ($0) * 30.0 / 240 ):( ( ($1) / 40000 ) * 15.0 )};
+	\end{tikzpicture}
+}
+\end{animateinline}

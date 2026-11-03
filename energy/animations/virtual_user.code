@@ -1,0 +1,326 @@
+\newcommand{\base}[1]{%
+	\def\ID{#1}
+	% FACILITY	
+	\draw [line width=1.0,orange,fill=orange!20] (0.3,0.0) rectangle (0.8,0.5);
+	\draw [line width=0.5,>=latex,->]  ( -0.1 ,  0.0 ) -- (  1.5 , 0.0 ) node [scale=0.8, below ] {$t$};
+	\draw [line width=0.5,>=latex,->]  ( 0.0  , -0.1 ) -- (  0.0 , 1.0 ) node [scale=0.8, above ] {$p^{def}_{\ID}(t)$};
+	\draw [line width=0.2,dashed]      ( 0.0  ,  0.5 ) node [scale=0.8, left ] {$P$} -- (  1.4 , 0.5 );
+	\draw [line width=0.5,>=latex,<->]    ( 0.3 , -0.1 ) -- node [scale=0.8, below ] {$\tau$} (  0.8 , -0.1 ) ;
+%	\draw [line width=1.0,dotted, orange] ( 0.3 , -0.2 ) node[scale=0.8,below,xshift=-5,yshift=1]{$t^{act}_{\ID}$} -- ( 0.3 , 0.8 );
+	% PDF
+	\draw [line width=1.0,dashed]  ( 3.5 ,  0.5 ) -- (  4.5 , 0.5 ) node [scale=0.8, right ] {$Prob(t^{act})$};
+	% RESULT
+	\draw [line width=0.5, dashed]     plot[smooth, raw gnuplot] function{plot "animations/DEMR_2013" every ::240::264 u ( ($0) * 3.0 / 24 + 2.5) :( ( ( ($6) - 16000 ) / 24000 ) * 1.5 - 2.0 )};	
+	\draw [line width=0.5,>=latex,->]  ( 2.4 , -2.0 ) -- (  5.5 , -2.0 ) node [scale=0.8, below ] {$t$};
+	\draw [line width=0.5,>=latex,->]  ( 2.5 , -2.1 ) -- (  2.5 , -0.5 ) node [scale=1.0, above ] {$p_{L}(t)$};
+}
+
+\newcommand\steps{11}%11
+
+\begin{animateinline}[autoplay,loop,width=7cm]{10}
+
+\begin{tikzpicture}
+	\base{1}
+\end{tikzpicture}
+\newframe
+
+\multiframe{\steps}{rPos=0+0.1}{
+	\begin{tikzpicture}
+	\base{1}
+	% ELIPSE EQUATION: (x/a)^2 + (y/b)^2 = 1
+	\pgfmathparse{ 1.0 * \rPos }\let\xp = \pgfmathresult
+	\pgfmathparse{ ( 2.5 * sqrt( 1 - ( \xp / 1.0 )^2 ) ) }\let\yp = \pgfmathresult
+	\pgfmathparse{ \xp + 1.5 }\let\xpos = \pgfmathresult
+	\pgfmathparse{ \yp - 2.0 }\let\ypos = \pgfmathresult
+	\draw [line width=0.5,orange,fill=orange!20] (\xpos,\ypos) rectangle ({\xpos + 0.3},{\ypos + 0.3});	
+	\end{tikzpicture}
+}
+\newframe
+
+\multiframe{\steps}{rPos=0+0.1}{
+	\begin{tikzpicture}
+	\base{2}
+	\draw [line width=0.5,orange,fill=orange!20] (2.5,-2.0) rectangle (2.8,-1.7);
+	% ELIPSE EQUATION: (x/a)^2 + (y/b)^2 = 1
+	\pgfmathparse{ 1.0 * \rPos }\let\xp = \pgfmathresult
+	\pgfmathparse{ ( 2.2 * sqrt( 1 - ( \xp / 1.0 )^2 ) ) }\let\yp = \pgfmathresult
+	\pgfmathparse{ \xp + 1.5 }\let\xpos = \pgfmathresult
+	\pgfmathparse{ \yp - 1.7 }\let\ypos = \pgfmathresult
+	\draw [line width=0.5,orange,fill=orange!20] (\xpos,\ypos) rectangle ({\xpos + 0.3},{\ypos + 0.3});	
+	\end{tikzpicture}
+}
+\newframe
+
+\multiframe{\steps}{rPos=0+0.1}{
+	\begin{tikzpicture}
+	\base{3}
+	\draw [line width=0.5,orange,fill=orange!20] (2.5,-2.0) rectangle (2.8,-1.7);
+	\draw [line width=0.5,orange,fill=orange!20] (2.5,-1.7) rectangle (2.8,-1.4);
+	% ELIPSE EQUATION: (x/a)^2 + (y/b)^2 = 1
+	\pgfmathparse{ 1.3 * \rPos }\let\xp = \pgfmathresult
+	\pgfmathparse{ ( 2.5 * sqrt( 1 - ( \xp / 1.3 )^2 ) ) }\let\yp = \pgfmathresult
+	\pgfmathparse{ \xp + 1.5 }\let\xpos = \pgfmathresult
+	\pgfmathparse{ \yp - 2.0 }\let\ypos = \pgfmathresult
+	\draw [line width=0.5,orange,fill=orange!20] (\xpos,\ypos) rectangle ({\xpos + 0.3},{\ypos + 0.3});	
+	\end{tikzpicture}
+}
+\newframe
+
+\multiframe{\steps}{rPos=0+0.1}{
+	\begin{tikzpicture}
+	\base{4}
+	\draw [line width=0.5,orange,fill=orange!20] (2.5,-2.0) rectangle (2.8,-1.7);
+	\draw [line width=0.5,orange,fill=orange!20] (2.5,-1.7) rectangle (2.8,-1.4);
+	\draw [line width=0.5,orange,fill=orange!20] (2.8,-2.0) rectangle (3.1,-1.7);
+	% ELIPSE EQUATION: (x/a)^2 + (y/b)^2 = 1
+	\pgfmathparse{ 1.6 * \rPos }\let\xp = \pgfmathresult
+	\pgfmathparse{ ( 2.5 * sqrt( 1 - ( \xp / 1.6 )^2 ) ) }\let\yp = \pgfmathresult
+	\pgfmathparse{ \xp + 1.5 }\let\xpos = \pgfmathresult
+	\pgfmathparse{ \yp - 2.0 }\let\ypos = \pgfmathresult
+	\draw [line width=0.5,orange,fill=orange!20] (\xpos,\ypos) rectangle ({\xpos + 0.3},{\ypos + 0.3});	
+	\end{tikzpicture}
+}
+\newframe
+
+\multiframe{\steps}{rPos=0+0.1}{
+	\begin{tikzpicture}
+	\base{5}
+	\draw [line width=0.5,orange,fill=orange!20] (2.5,-2.0) rectangle (2.8,-1.7);
+	\draw [line width=0.5,orange,fill=orange!20] (2.5,-1.7) rectangle (2.8,-1.4);
+	\draw [line width=0.5,orange,fill=orange!20] (2.8,-2.0) rectangle (3.1,-1.7);
+	\draw [line width=0.5,orange,fill=orange!20] (3.1,-2.0) rectangle (3.4,-1.7);
+	% ELIPSE EQUATION: (x/a)^2 + (y/b)^2 = 1
+	\pgfmathparse{ 1.9 * \rPos }\let\xp = \pgfmathresult
+	\pgfmathparse{ ( 2.5 * sqrt( 1 - ( \xp / 1.9 )^2 ) ) }\let\yp = \pgfmathresult
+	\pgfmathparse{ \xp + 1.5 }\let\xpos = \pgfmathresult
+	\pgfmathparse{ \yp - 2.0 }\let\ypos = \pgfmathresult
+	\draw [line width=0.5,orange,fill=orange!20] (\xpos,\ypos) rectangle ({\xpos + 0.3},{\ypos + 0.3});	
+	\end{tikzpicture}
+}
+\newframe
+
+\multiframe{\steps}{rPos=0+0.1}{
+	\begin{tikzpicture}
+	\base{6}
+	\draw [line width=0.5,orange,fill=orange!20] (2.5,-2.0) rectangle (2.8,-1.7);
+	\draw [line width=0.5,orange,fill=orange!20] (2.5,-1.7) rectangle (2.8,-1.4);
+	\draw [line width=0.5,orange,fill=orange!20] (2.8,-2.0) rectangle (3.1,-1.7);
+	\draw [line width=0.5,orange,fill=orange!20] (3.1,-2.0) rectangle (3.4,-1.7);
+	\draw [line width=0.5,orange,fill=orange!20] (3.4,-2.0) rectangle (3.7,-1.7);
+	% ELIPSE EQUATION: (x/a)^2 + (y/b)^2 = 1
+	\pgfmathparse{ 1.9 * \rPos }\let\xp = \pgfmathresult
+	\pgfmathparse{ ( 2.2 * sqrt( 1 - ( \xp / 1.9 )^2 ) ) }\let\yp = \pgfmathresult
+	\pgfmathparse{ \xp + 1.5 }\let\xpos = \pgfmathresult
+	\pgfmathparse{ \yp - 1.7 }\let\ypos = \pgfmathresult
+	\draw [line width=0.5,orange,fill=orange!20] (\xpos,\ypos) rectangle ({\xpos + 0.3},{\ypos + 0.3});	
+	\end{tikzpicture}
+}
+\newframe
+
+\multiframe{\steps}{rPos=0+0.1}{
+	\begin{tikzpicture}
+	\base{7}
+	\draw [line width=0.5,orange,fill=orange!20] (2.5,-2.0) rectangle (2.8,-1.7);
+	\draw [line width=0.5,orange,fill=orange!20] (2.5,-1.7) rectangle (2.8,-1.4);
+	\draw [line width=0.5,orange,fill=orange!20] (2.8,-2.0) rectangle (3.1,-1.7);
+	\draw [line width=0.5,orange,fill=orange!20] (3.1,-2.0) rectangle (3.4,-1.7);
+	\draw [line width=0.5,orange,fill=orange!20] (3.4,-2.0) rectangle (3.7,-1.7);
+	\draw [line width=0.5,orange,fill=orange!20] (3.4,-1.7) rectangle (3.7,-1.4);
+	% ELIPSE EQUATION: (x/a)^2 + (y/b)^2 = 1
+	\pgfmathparse{ 1.9 * \rPos }\let\xp = \pgfmathresult
+	\pgfmathparse{ ( 1.9 * sqrt( 1 - ( \xp / 1.9 )^2 ) ) }\let\yp = \pgfmathresult
+	\pgfmathparse{ \xp + 1.5 }\let\xpos = \pgfmathresult
+	\pgfmathparse{ \yp - 1.4 }\let\ypos = \pgfmathresult
+	\draw [line width=0.5,orange,fill=orange!20] (\xpos,\ypos) rectangle ({\xpos + 0.3},{\ypos + 0.3});	
+	\end{tikzpicture}
+}
+\newframe
+
+\multiframe{\steps}{rPos=0+0.1}{
+	\begin{tikzpicture}
+	\base{8}
+	\draw [line width=0.5,orange,fill=orange!20] (2.5,-2.0) rectangle (2.8,-1.7);
+	\draw [line width=0.5,orange,fill=orange!20] (2.5,-1.7) rectangle (2.8,-1.4);
+	\draw [line width=0.5,orange,fill=orange!20] (2.8,-2.0) rectangle (3.1,-1.7);
+	\draw [line width=0.5,orange,fill=orange!20] (3.1,-2.0) rectangle (3.4,-1.7);
+	\draw [line width=0.5,orange,fill=orange!20] (3.4,-2.0) rectangle (3.7,-1.7);
+	\draw [line width=0.5,orange,fill=orange!20] (3.4,-1.7) rectangle (3.7,-1.4);
+	\draw [line width=0.5,orange,fill=orange!20] (3.4,-1.4) rectangle (3.7,-1.1);
+	% ELIPSE EQUATION: (x/a)^2 + (y/b)^2 = 1
+	\pgfmathparse{ 2.2 * \rPos }\let\xp = \pgfmathresult
+	\pgfmathparse{ ( 2.5 * sqrt( 1 - ( \xp / 2.2 )^2 ) ) }\let\yp = \pgfmathresult
+	\pgfmathparse{ \xp + 1.5 }\let\xpos = \pgfmathresult
+	\pgfmathparse{ \yp - 2.0 }\let\ypos = \pgfmathresult
+	\draw [line width=0.5,orange,fill=orange!20] (\xpos,\ypos) rectangle ({\xpos + 0.3},{\ypos + 0.3});	
+	\end{tikzpicture}
+}
+\newframe
+
+\multiframe{\steps}{rPos=0+0.1}{
+	\begin{tikzpicture}
+	\base{9}
+	\draw [line width=0.5,orange,fill=orange!20] (2.5,-2.0) rectangle (2.8,-1.7);
+	\draw [line width=0.5,orange,fill=orange!20] (2.5,-1.7) rectangle (2.8,-1.4);
+	\draw [line width=0.5,orange,fill=orange!20] (2.8,-2.0) rectangle (3.1,-1.7);
+	\draw [line width=0.5,orange,fill=orange!20] (3.1,-2.0) rectangle (3.4,-1.7);
+	\draw [line width=0.5,orange,fill=orange!20] (3.4,-2.0) rectangle (3.7,-1.7);
+	\draw [line width=0.5,orange,fill=orange!20] (3.4,-1.7) rectangle (3.7,-1.4);
+	\draw [line width=0.5,orange,fill=orange!20] (3.4,-1.4) rectangle (3.7,-1.1);
+	\draw [line width=0.5,orange,fill=orange!20] (3.7,-2.0) rectangle (4.0,-1.7);
+	% ELIPSE EQUATION: (x/a)^2 + (y/b)^2 = 1
+	\pgfmathparse{ 2.2 * \rPos }\let\xp = \pgfmathresult
+	\pgfmathparse{ ( 2.2 * sqrt( 1 - ( \xp / 2.2 )^2 ) ) }\let\yp = \pgfmathresult
+	\pgfmathparse{ \xp + 1.5 }\let\xpos = \pgfmathresult
+	\pgfmathparse{ \yp - 1.7 }\let\ypos = \pgfmathresult
+	\draw [line width=0.5,orange,fill=orange!20] (\xpos,\ypos) rectangle ({\xpos + 0.3},{\ypos + 0.3});	
+	\end{tikzpicture}
+}
+\newframe
+
+\multiframe{\steps}{rPos=0+0.1}{
+	\begin{tikzpicture}
+	\base{10}
+	\draw [line width=0.5,orange,fill=orange!20] (2.5,-2.0) rectangle (2.8,-1.7);
+	\draw [line width=0.5,orange,fill=orange!20] (2.5,-1.7) rectangle (2.8,-1.4);
+	\draw [line width=0.5,orange,fill=orange!20] (2.8,-2.0) rectangle (3.1,-1.7);
+	\draw [line width=0.5,orange,fill=orange!20] (3.1,-2.0) rectangle (3.4,-1.7);
+	\draw [line width=0.5,orange,fill=orange!20] (3.4,-2.0) rectangle (3.7,-1.7);
+	\draw [line width=0.5,orange,fill=orange!20] (3.4,-1.7) rectangle (3.7,-1.4);
+	\draw [line width=0.5,orange,fill=orange!20] (3.4,-1.4) rectangle (3.7,-1.1);
+	\draw [line width=0.5,orange,fill=orange!20] (3.7,-2.0) rectangle (4.0,-1.7);
+	\draw [line width=0.5,orange,fill=orange!20] (3.7,-1.7) rectangle (4.0,-1.4);
+	% ELIPSE EQUATION: (x/a)^2 + (y/b)^2 = 1
+	\pgfmathparse{ 2.5 * \rPos }\let\xp = \pgfmathresult
+	\pgfmathparse{ ( 2.5 * sqrt( 1 - ( \xp / 2.5 )^2 ) ) }\let\yp = \pgfmathresult
+	\pgfmathparse{ \xp + 1.5 }\let\xpos = \pgfmathresult
+	\pgfmathparse{ \yp - 2.0 }\let\ypos = \pgfmathresult
+	\draw [line width=0.5,orange,fill=orange!20] (\xpos,\ypos) rectangle ({\xpos + 0.3},{\ypos + 0.3});	
+	\end{tikzpicture}
+}
+\newframe
+
+\multiframe{\steps}{rPos=0+0.1}{
+	\begin{tikzpicture}
+	\base{11}
+	\draw [line width=0.5,orange,fill=orange!20] (2.5,-2.0) rectangle (2.8,-1.7);
+	\draw [line width=0.5,orange,fill=orange!20] (2.5,-1.7) rectangle (2.8,-1.4);
+	\draw [line width=0.5,orange,fill=orange!20] (2.8,-2.0) rectangle (3.1,-1.7);
+	\draw [line width=0.5,orange,fill=orange!20] (3.1,-2.0) rectangle (3.4,-1.7);
+	\draw [line width=0.5,orange,fill=orange!20] (3.4,-2.0) rectangle (3.7,-1.7);
+	\draw [line width=0.5,orange,fill=orange!20] (3.4,-1.7) rectangle (3.7,-1.4);
+	\draw [line width=0.5,orange,fill=orange!20] (3.4,-1.4) rectangle (3.7,-1.1);
+	\draw [line width=0.5,orange,fill=orange!20] (3.7,-2.0) rectangle (4.0,-1.7);
+	\draw [line width=0.5,orange,fill=orange!20] (3.7,-1.7) rectangle (4.0,-1.4);
+	\draw [line width=0.5,orange,fill=orange!20] (4.0,-2.0) rectangle (4.3,-1.7);
+	% ELIPSE EQUATION: (x/a)^2 + (y/b)^2 = 1
+	\pgfmathparse{ 2.8 * \rPos }\let\xp = \pgfmathresult
+	\pgfmathparse{ ( 2.5 * sqrt( 1 - ( \xp / 2.8 )^2 ) ) }\let\yp = \pgfmathresult
+	\pgfmathparse{ \xp + 1.5 }\let\xpos = \pgfmathresult
+	\pgfmathparse{ \yp - 2.0 }\let\ypos = \pgfmathresult
+	\draw [line width=0.5,orange,fill=orange!20] (\xpos,\ypos) rectangle ({\xpos + 0.3},{\ypos + 0.3});	
+	\end{tikzpicture}
+}
+\newframe
+
+\multiframe{\steps}{rPos=0+0.1}{
+	\begin{tikzpicture}
+	\base{12}
+	\draw [line width=0.5,orange,fill=orange!20] (2.5,-2.0) rectangle (2.8,-1.7);
+	\draw [line width=0.5,orange,fill=orange!20] (2.5,-1.7) rectangle (2.8,-1.4);
+	\draw [line width=0.5,orange,fill=orange!20] (2.8,-2.0) rectangle (3.1,-1.7);
+	\draw [line width=0.5,orange,fill=orange!20] (3.1,-2.0) rectangle (3.4,-1.7);
+	\draw [line width=0.5,orange,fill=orange!20] (3.4,-2.0) rectangle (3.7,-1.7);
+	\draw [line width=0.5,orange,fill=orange!20] (3.4,-1.7) rectangle (3.7,-1.4);
+	\draw [line width=0.5,orange,fill=orange!20] (3.4,-1.4) rectangle (3.7,-1.1);
+	\draw [line width=0.5,orange,fill=orange!20] (3.7,-2.0) rectangle (4.0,-1.7);
+	\draw [line width=0.5,orange,fill=orange!20] (3.7,-1.7) rectangle (4.0,-1.4);
+	\draw [line width=0.5,orange,fill=orange!20] (4.0,-2.0) rectangle (4.3,-1.7);
+	\draw [line width=0.5,orange,fill=orange!20] (4.3,-2.0) rectangle (4.6,-1.7);
+	% ELIPSE EQUATION: (x/a)^2 + (y/b)^2 = 1
+	\pgfmathparse{ 3.1 * \rPos }\let\xp = \pgfmathresult
+	\pgfmathparse{ ( 2.5 * sqrt( 1 - ( \xp / 3.1 )^2 ) ) }\let\yp = \pgfmathresult
+	\pgfmathparse{ \xp + 1.5 }\let\xpos = \pgfmathresult
+	\pgfmathparse{ \yp - 2.0 }\let\ypos = \pgfmathresult
+	\draw [line width=0.5,orange,fill=orange!20] (\xpos,\ypos) rectangle ({\xpos + 0.3},{\ypos + 0.3});	
+	\end{tikzpicture}
+}
+\newframe
+
+\multiframe{\steps}{rPos=0+0.1}{
+	\begin{tikzpicture}
+	\base{13}
+	\draw [line width=0.5,orange,fill=orange!20] (2.5,-2.0) rectangle (2.8,-1.7);
+	\draw [line width=0.5,orange,fill=orange!20] (2.5,-1.7) rectangle (2.8,-1.4);
+	\draw [line width=0.5,orange,fill=orange!20] (2.8,-2.0) rectangle (3.1,-1.7);
+	\draw [line width=0.5,orange,fill=orange!20] (3.1,-2.0) rectangle (3.4,-1.7);
+	\draw [line width=0.5,orange,fill=orange!20] (3.4,-2.0) rectangle (3.7,-1.7);
+	\draw [line width=0.5,orange,fill=orange!20] (3.4,-1.7) rectangle (3.7,-1.4);
+	\draw [line width=0.5,orange,fill=orange!20] (3.4,-1.4) rectangle (3.7,-1.1);
+	\draw [line width=0.5,orange,fill=orange!20] (3.7,-2.0) rectangle (4.0,-1.7);
+	\draw [line width=0.5,orange,fill=orange!20] (3.7,-1.7) rectangle (4.0,-1.4);
+	\draw [line width=0.5,orange,fill=orange!20] (4.0,-2.0) rectangle (4.3,-1.7);
+	\draw [line width=0.5,orange,fill=orange!20] (4.3,-2.0) rectangle (4.6,-1.7);
+	\draw [line width=0.5,orange,fill=orange!20] (4.6,-2.0) rectangle (4.9,-1.7);
+	% ELIPSE EQUATION: (x/a)^2 + (y/b)^2 = 1
+	\pgfmathparse{ 3.1 * \rPos }\let\xp = \pgfmathresult
+	\pgfmathparse{ ( 2.2 * sqrt( 1 - ( \xp / 3.1 )^2 ) ) }\let\yp = \pgfmathresult
+	\pgfmathparse{ \xp + 1.5 }\let\xpos = \pgfmathresult
+	\pgfmathparse{ \yp - 1.7 }\let\ypos = \pgfmathresult
+	\draw [line width=0.5,orange,fill=orange!20] (\xpos,\ypos) rectangle ({\xpos + 0.3},{\ypos + 0.3});	
+	\end{tikzpicture}
+}
+\newframe
+
+\multiframe{\steps}{rPos=0+0.1}{
+	\begin{tikzpicture}
+	\base{14}
+	\draw [line width=0.5,orange,fill=orange!20] (2.5,-2.0) rectangle (2.8,-1.7);
+	\draw [line width=0.5,orange,fill=orange!20] (2.5,-1.7) rectangle (2.8,-1.4);
+	\draw [line width=0.5,orange,fill=orange!20] (2.8,-2.0) rectangle (3.1,-1.7);
+	\draw [line width=0.5,orange,fill=orange!20] (3.1,-2.0) rectangle (3.4,-1.7);
+	\draw [line width=0.5,orange,fill=orange!20] (3.4,-2.0) rectangle (3.7,-1.7);
+	\draw [line width=0.5,orange,fill=orange!20] (3.4,-1.7) rectangle (3.7,-1.4);
+	\draw [line width=0.5,orange,fill=orange!20] (3.4,-1.4) rectangle (3.7,-1.1);
+	\draw [line width=0.5,orange,fill=orange!20] (3.7,-2.0) rectangle (4.0,-1.7);
+	\draw [line width=0.5,orange,fill=orange!20] (3.7,-1.7) rectangle (4.0,-1.4);
+	\draw [line width=0.5,orange,fill=orange!20] (4.0,-2.0) rectangle (4.3,-1.7);
+	\draw [line width=0.5,orange,fill=orange!20] (4.3,-2.0) rectangle (4.6,-1.7);
+	\draw [line width=0.5,orange,fill=orange!20] (4.6,-2.0) rectangle (4.9,-1.7);
+	\draw [line width=0.5,orange,fill=orange!20] (4.6,-1.7) rectangle (4.9,-1.4);
+	% ELIPSE EQUATION: (x/a)^2 + (y/b)^2 = 1
+	\pgfmathparse{ 3.1 * \rPos }\let\xp = \pgfmathresult
+	\pgfmathparse{ ( 1.9 * sqrt( 1 - ( \xp / 3.1 )^2 ) ) }\let\yp = \pgfmathresult
+	\pgfmathparse{ \xp + 1.5 }\let\xpos = \pgfmathresult
+	\pgfmathparse{ \yp - 1.4 }\let\ypos = \pgfmathresult
+	\draw [line width=0.5,orange,fill=orange!20] (\xpos,\ypos) rectangle ({\xpos + 0.3},{\ypos + 0.3});	
+	\end{tikzpicture}
+}
+\newframe
+
+\multiframe{\steps}{rPos=0+0.1}{
+	\begin{tikzpicture}
+	\base{15}
+	\draw [line width=0.5,orange,fill=orange!20] (2.5,-2.0) rectangle (2.8,-1.7);
+	\draw [line width=0.5,orange,fill=orange!20] (2.5,-1.7) rectangle (2.8,-1.4);
+	\draw [line width=0.5,orange,fill=orange!20] (2.8,-2.0) rectangle (3.1,-1.7);
+	\draw [line width=0.5,orange,fill=orange!20] (3.1,-2.0) rectangle (3.4,-1.7);
+	\draw [line width=0.5,orange,fill=orange!20] (3.4,-2.0) rectangle (3.7,-1.7);
+	\draw [line width=0.5,orange,fill=orange!20] (3.4,-1.7) rectangle (3.7,-1.4);
+	\draw [line width=0.5,orange,fill=orange!20] (3.4,-1.4) rectangle (3.7,-1.1);
+	\draw [line width=0.5,orange,fill=orange!20] (3.7,-2.0) rectangle (4.0,-1.7);
+	\draw [line width=0.5,orange,fill=orange!20] (3.7,-1.7) rectangle (4.0,-1.4);
+	\draw [line width=0.5,orange,fill=orange!20] (4.0,-2.0) rectangle (4.3,-1.7);
+	\draw [line width=0.5,orange,fill=orange!20] (4.3,-2.0) rectangle (4.6,-1.7);
+	\draw [line width=0.5,orange,fill=orange!20] (4.6,-2.0) rectangle (4.9,-1.7);
+	\draw [line width=0.5,orange,fill=orange!20] (4.6,-1.7) rectangle (4.9,-1.4);
+	\draw [line width=0.5,orange,fill=orange!20] (4.6,-1.4) rectangle (4.9,-1.1);
+	% ELIPSE EQUATION: (x/a)^2 + (y/b)^2 = 1
+	\pgfmathparse{ 3.1 * \rPos }\let\xp = \pgfmathresult
+	\pgfmathparse{ ( 1.6 * sqrt( 1 - ( \xp / 3.1 )^2 ) ) }\let\yp = \pgfmathresult
+	\pgfmathparse{ \xp + 1.5 }\let\xpos = \pgfmathresult
+	\pgfmathparse{ \yp - 1.1 }\let\ypos = \pgfmathresult
+	\draw [line width=0.5,orange,fill=orange!20] (\xpos,\ypos) rectangle ({\xpos + 0.3},{\ypos + 0.3});	
+	\end{tikzpicture}
+}
+
+\end{animateinline}

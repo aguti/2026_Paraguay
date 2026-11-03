@@ -1,0 +1,78 @@
+\newcommand{\baseG}{%
+	% FACILITY a
+	\coordinate (xa) at (0.0,0.0);
+	\draw [line width=1.0,>=latex,->] ( $(xa) + ( -0.1 ,  0.0 )$ ) -- ( $(xa) + ( 1.5 , 0.0 )$ ) node[scale=1.5, below ] {$t$};
+	\draw [line width=1.0,>=latex,->] ( $(xa) + (  0.0 , -0.1 )$ ) -- ( $(xa) + ( 0.0 , 1.0 )$ ) node[scale=1.5, above ] {$p^{c}_{i}(t)$};
+%	\draw [line width=0.5, blue] plot[samples=100, domain=0:1.5 ] function{ (1 + sin(5*x))/2};
+	\draw [line width=3.0,blue,>=latex,->]  ( $(xa) + ( 1.5 , 0.5 )$ ) to[out=0,in=130] (  $(xa) + ( 2.8 , -0.2 )$ );
+
+	\draw [line width=1.0,>=latex,->] ( $(xa) + ( -0.1 , -2.0 )$ ) -- ( $(xa) + ( 1.5 , -2.0 )$ ) node[scale=1.5, below ] {$t$};
+	\draw [line width=1.0,>=latex,->] ( $(xa) + (  0.0 , -2.1 )$ ) -- ( $(xa) + ( 0.0 , -1.0 )$ ) node[scale=1.5, above ] {$p^{nc}_{i}(t)$};
+	\draw [line width=0.5, red] plot[samples=100, domain=0:1.5 ] function{ ( 1 + sin(10*x))/2 - 2.0};
+	\draw [line width=3.0,red,>=latex,->]  ( $(xa) + ( 1.5 , -1.5 )$ ) to[out=0,in=230] (  $(xa) + ( 2.8 , -0.8 )$ );
+
+	\draw [line width=1.0,>=latex,->] ( $(xa) + (  2.9 , -1.0 )$ ) -- ( $(xa) + ( 5.0 , -1.0 )$ ) node[scale=1.5, below ] {$t$};
+	\draw [line width=1.0,>=latex,->] ( $(xa) + (  3.0 , -1.1 )$ ) -- ( $(xa) + ( 3.0 ,  0.5 )$ ) node[scale=1.5, above ] {$p_{i}(t)$};
+%	\draw [line width=0.5, green] plot[samples=100, domain=3:5 ] function{ (2 + sin(5*x) + sin(10*x))/4 - 1.0};
+
+	\node [scale=2.0] at ( $(xa) + ( 2.5 ,  2.2 )$ ) {Facility $i$};
+	\draw ( $(xa) + ( 2.2 ,  0.0 )$ ) ellipse ( 3.8 and 3.1);
+
+
+	% FACILITY b
+	\coordinate (xa) at (2.0,-6.0);
+	\draw [line width=1.0,>=latex,->] ( $(xa) + ( -0.1 ,  0.0 )$ ) -- ( $(xa) + ( 1.5 , 0.0 )$ ) node[scale=1.5, below ] {$t$};
+	\draw [line width=1.0,>=latex,->] ( $(xa) + (  0.0 , -0.1 )$ ) -- ( $(xa) + ( 0.0 , 1.0 )$ ) node[scale=1.5, above ] {$p^{c}_{i+1}(t)$};
+%	\draw [line width=0.5, blue] plot[samples=100, domain=2:3.5 ] function{ (1 + sin(-10*(x - 2)))/2 - 6.0};
+	\draw [line width=3.0,blue,>=latex,->]  ( $(xa) + ( 1.5 , 0.5 )$ ) to[out=0,in=130] (  $(xa) + ( 2.8 , -0.2 )$ );
+
+	\draw [line width=1.0,>=latex,->] ( $(xa) + ( -0.1 , -2.0 )$ ) -- ( $(xa) + ( 1.5 , -2.0 )$ ) node[scale=1.5, below ] {$t$};
+	\draw [line width=1.0,>=latex,->] ( $(xa) + (  0.0 , -2.1 )$ ) -- ( $(xa) + ( 0.0 , -1.0 )$ ) node[scale=1.5, above ] {$p^{nc}_{i+1}(t)$};
+	\draw [line width=0.5, red] plot[samples=100, domain=2:3.5 ] function{ (1 + sin(-5*(x - 2)))/2 - 8.0};
+	\draw [line width=3.0,red,>=latex,->]  ( $(xa) + ( 1.5 , -1.5 )$ ) to[out=0,in=230] (  $(xa) + ( 2.8 , -0.8 )$ );
+
+	\draw [line width=1.0,>=latex,->] ( $(xa) + (  2.9 , -1.0 )$ ) -- ( $(xa) + ( 5.0 , -1.0 )$ ) node[scale=1.5, below ] {$t$};
+	\draw [line width=1.0,>=latex,->] ( $(xa) + (  3.0 , -1.1 )$ ) -- ( $(xa) + ( 3.0 ,  0.5 )$ ) node[scale=1.5, above ] {$p_{i+1}(t)$};
+%	\draw [line width=0.5, green] plot[samples=100, domain=5:7 ] function{ (2 + sin(-5*(x - 2.0)) + sin(-10*(x - 2.0)))/4 - 6.9};
+
+	\node [scale=2.0] at ( $(xa) + ( 2.5 ,  2.2 )$ ) {Facility $i+1$};
+	\draw ( $(xa) + ( 2.2 ,  0.0 )$ ) ellipse ( 3.9 and 3.1);
+
+	% ENVIRONMENT
+	\coordinate (xa) at (10.0,-3.5);
+
+	\draw [line width=1.0,>=latex,->] ( $(xa) + (  -0.1 , 0.0 )$ ) -- ( $(xa) + ( 6.0 , 0.0 )$ ) node[scale=1.5, below ] {$t$};
+	\draw [line width=1.0,>=latex,->] ( $(xa) + (   0.0 , -0.1 )$ ) -- ( $(xa) + ( 0.0 ,  4.0 )$ ) node[scale=1.5, above ] {$P(t)$};
+%	\draw [line width=1.0, green] plot[samples=100, domain=10:16 ] function{ -1.0};
+	\node [scale=2.0, align=center] at ( $(xa) + ( 3.0 , 5.0 )$ ) {Aggregated\\consumption};
+	\draw ( $(xa) + ( 3.0 ,  2.2 )$ ) ellipse ( 4.5 and 4);
+
+	\draw [line width=3.0,green,>=latex,->]  ( 5.0 , 0.5 ) to[out=0,in=180] (  9.5 , -1.0 );
+	\draw [line width=3.0,green,>=latex,->]  ( 7.0 , -5.5 ) to[out=0,in=180] (  9.5 , -2.0 );
+}
+
+\begin{animateinline}[autoplay,loop,width=9.5cm]{10}
+\multiframe{300}{rPos=0+0.01}{ % 300
+	\begin{tikzpicture}
+	\baseG
+
+	\draw [line width=0.5, blue] plot[samples=100, domain=0:1.5 ] function{ (1 + sin(5*(x + \rPos )))/2};
+	\draw [line width=0.5, green] plot[samples=100, domain=3:5 ] function{ (2 + sin(5*(x + \rPos )) + sin(10*x))/4 - 1.0};
+
+	\draw [line width=0.5, blue] plot[samples=100, domain=2:3.5 ] function{ (1 + sin( -10 * (x + \rPos)))/2 - 6.0};
+	\draw [line width=0.5, green] plot[samples=100, domain=5:7 ] function{ (2  + sin( -5 * x ) + sin(-10*(x + \rPos)))/4 - 6.9};
+
+
+
+
+	\draw [line width=1.0, green] plot[samples=100, domain=10:16 ] function{ (4 + sin(5*(x + \rPos )) + sin(10*x) + sin(-5*x) + sin(-10*(x + \rPos)))/2.0 - 3.0  };
+
+
+	\end{tikzpicture}
+}
+\end{animateinline}
+
+
+
+
+
